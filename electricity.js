@@ -1,5 +1,6 @@
 function Electricity() {
 	let unitsAvailable = 0;
+	let advanceOwing = 0;
 	let appliances = {
 		'Stove': 10,
 		'Kettle': 5,
@@ -8,7 +9,9 @@ function Electricity() {
 	};
 
 	function topUpElectricity(amount) {
-		if (amount > 0) {
+		if (amount === 'advance' && !advanceTaken()) {
+			unitsAvailable += 21;
+		} else if (amount > 0) {
 			unitsAvailable += (amount / 10) * 7;
 		}
 	}
@@ -31,6 +34,12 @@ function Electricity() {
 	}
 
 	function advanceTaken() {
+		if (advanceOwing > 0) {
+			return true;
+		} else {
+			advanceOwing = 30;
+			return false;
+		}
 	}
 
 	function totalAmountSpent() {
