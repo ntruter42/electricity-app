@@ -23,7 +23,11 @@ function Electricity() {
 	*/
 
 	function useAppliance(appliance) {
-
+		if (unitsAvailable >= appliances[appliance]) {
+			unitsAvailable -= appliances[appliance];
+			return true;
+		}
+		return false;
 	}
 
 	function advanceTaken() {
@@ -42,6 +46,5 @@ function Electricity() {
 		useAppliance,
 		totalAmountSpent,
 		totalUnitsBought
-
 	}
 }
