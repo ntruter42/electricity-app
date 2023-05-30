@@ -14,14 +14,24 @@ const electricity = Electricity();
 
 function buyButtonClicked() {
 	let topupAmount = document.querySelector('input[name="buyElectricity"]:checked');
-	
+
 	if (topupAmount) {
 		electricity.topUpElectricity(topupAmount.value);
 		updateDisplay();
 	} else {
-		console.log('show error message');
+		console.log('no amount selected');
 	}
+}
 
+function useButtonClicked() {
+	let applianceUsed = document.querySelector('input[name="useElectricity"]:checked');
+
+	if (applianceUsed) {
+		electricity.useAppliance(applianceUsed.value);
+		updateDisplay();
+	} else {
+		console.log('no appliance selected');
+	}
 }
 
 function updateDisplay() {
@@ -39,6 +49,4 @@ function updateDisplay() {
 // DOM events here
 buy.addEventListener('click', buyButtonClicked);
 
-use.addEventListener('click', function () {
-	console.log('Use button clicked');
-});
+use.addEventListener('click', useButtonClicked);
