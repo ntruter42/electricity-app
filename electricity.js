@@ -1,46 +1,47 @@
 function Electricity() {
+	let unitsAvailable = 0;
+	let appliances = {
+		'Stove': 10,
+		'Kettle': 5,
+		'TV': 3,
+		'Fridge': 13
+	};
 
-    // do we want to go with this or array? 
-    let appliances = {
-        'Stove': 10, 
-        'Kettle': 5, 
-        'TV': 3, 
-        'Fridge': 13
-    };
+	function topUpElectricity(amount) {
+		if (amount > 0) {
+			unitsAvailable += (amount / 10) * 7;
+		}
+	}
 
-    function topUpElectricity(amount) {
+	function getUnitsAvailable() {
+		return unitsAvailable;
+	}
 
+	/*
+	* return true and subtract from units available if there is enough units to use the appliance
+	* other wise return false and do nothing.
+	*/
 
-    }
+	function useAppliance(appliance) {
 
-    function getUnitsAvailable() {
-         return unitsAvailable;
-    }
+	}
 
-    /*
-    * return true and substract from unit available if there is enough units to use the appliance
-    * other wise return false and do nothing.
-    */
-    function useAppliance(appliance) {
-        
-    }
+	function advanceTaken() {
+	}
 
-    function advanceTaken() {
-    }
+	function totalAmountSpent() {
+	}
 
-    function totalAmountSpent() {
-    }
+	function totalUnitsBought() {
+	}
 
-    function totalUnitsBought(){
-    }
+	return {
+		advanceTaken,
+		topUpElectricity,
+		getUnitsAvailable,
+		useAppliance,
+		totalAmountSpent,
+		totalUnitsBought
 
-    return {
-        advanceTaken,
-        topUpElectricity,
-        getUnitsAvailable,
-        useAppliance,
-        totalAmountSpent,
-        totalUnitsBought
-
-    }
+	}
 }
