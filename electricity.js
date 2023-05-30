@@ -13,16 +13,19 @@ function Electricity() {
 	function topUpElectricity(amount) {
 		if (amount === 'advance' && !advanceTaken()) {
 			unitsAvailable += 21;
+			unitsBought += 21;
 			advanceBalance = 30;
-		} else if (typeof amount === 'number') {
-			amountSpent += amount;
-			if (amount > advanceBalance) {
-				amount -= advanceBalance;
+		} else if (typeof Number(amount) === 'number' && Number(amount) > 0) {
+			let amountValue = Number(amount);
+
+			amountSpent += amountValue;
+			if (amountValue > advanceBalance) {
+				amountValue -= advanceBalance;
 				advanceBalance = 0;
-				unitsAvailable += (amount / 10) * 7;
-				unitsBought += (amount / 10) * 7;
+				unitsAvailable += (amountValue / 10) * 7;
+				unitsBought += (amountValue / 10) * 7;
 			} else {
-				advanceBalance -= amount;
+				advanceBalance -= amountValue;
 			}
 		}
 	}
