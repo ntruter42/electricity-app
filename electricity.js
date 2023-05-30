@@ -38,6 +38,10 @@ function Electricity() {
 		return unitsAvailable;
 	}
 
+	function getAdvanceBalance() {
+		return advanceBalance;
+	}
+
 	function useAppliance(appliance) {
 		if (unitsAvailable >= appliances[appliance]) {
 			unitsAvailable -= appliances[appliance];
@@ -96,6 +100,7 @@ function Electricity() {
 		advanceTaken,
 		topUpElectricity,
 		getUnitsAvailable,
+		getAdvanceBalance,
 		useAppliance,
 		totalAmountSpent,
 		totalUnitsBought,

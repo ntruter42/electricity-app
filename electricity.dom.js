@@ -9,6 +9,7 @@ const unitsAvailable = document.querySelector('.unitsAvailable');
 const totalUnits = document.querySelector('.totalUnits');
 const totalAmount = document.querySelector('.totalAmount');
 const advanceTaken = document.querySelector('.advanceTaken');
+const advanceBalance = document.querySelector('.advanceBalance');
 
 // Factory Function instance 
 const electricity = Electricity();
@@ -65,6 +66,13 @@ function updateDisplay() {
 		advanceTaken.classList.remove('hidden');
 	} else {
 		advanceTaken.classList.add('hidden');
+	}
+
+	if (electricity.advanceTaken()) {
+		advanceBalance.parentNode.parentNode.classList.remove('hidden');
+		advanceBalance.innerHTML = electricity.getAdvanceBalance().toFixed(2);
+	} else {
+		advanceBalance.parentNode.parentNode.classList.add('hidden');
 	}
 }
 
