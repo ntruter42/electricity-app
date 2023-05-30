@@ -11,6 +11,12 @@ const advanceTaken = document.querySelector('.advanceTaken');
 
 // Factory Function instance 
 const electricity = Electricity();
+if (localStorage.getItem('electricityValues')) {
+	electricity.setValues(JSON.parse(localStorage.getItem('electricityValues')));
+	updateDisplay();
+} else {
+	updateLocalStorage();
+}
 
 function buyButtonClicked() {
 	let topupAmount = document.querySelector('input[name="buyElectricity"]:checked');
@@ -18,6 +24,7 @@ function buyButtonClicked() {
 	if (topupAmount) {
 		electricity.topUpElectricity(topupAmount.value);
 		updateDisplay();
+		updateLocalStorage();
 	} else {
 		console.log('no amount selected');
 	}
@@ -29,6 +36,7 @@ function useButtonClicked() {
 	if (applianceUsed) {
 		electricity.useAppliance(applianceUsed.value);
 		updateDisplay();
+		updateLocalStorage();
 	} else {
 		console.log('no appliance selected');
 	}
@@ -44,6 +52,10 @@ function updateDisplay() {
 	} else {
 		advanceTaken.classList.add('hidden');
 	}
+}
+
+function updateLocalStorage() {
+	localStorage.setItem('electricityValues', JSON.stringify(electricity.getValues()));
 }
 
 // DOM events here

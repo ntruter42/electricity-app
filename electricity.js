@@ -58,12 +58,30 @@ function Electricity() {
 		return unitsBought;
 	}
 
+	function setValues(values) {
+		unitsAvailable = values['unitsAvailable'];
+		advanceBalance = values['advanceBalance'];
+		amountSpent = values['amountSpent'];
+		unitsBought = values['unitsBought'];
+	}
+
+	function getValues() {
+		return {
+			'unitsAvailable': unitsAvailable,
+			'advanceBalance': advanceBalance,
+			'amountSpent': amountSpent,
+			'unitsBought': unitsBought
+		}
+	}
+
 	return {
 		advanceTaken,
 		topUpElectricity,
 		getUnitsAvailable,
 		useAppliance,
 		totalAmountSpent,
-		totalUnitsBought
+		totalUnitsBought,
+		setValues,
+		getValues
 	}
 }
