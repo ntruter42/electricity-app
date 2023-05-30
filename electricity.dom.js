@@ -8,17 +8,18 @@ const reset = document.querySelector('.resetNow');
 const unitsAvailable = document.querySelector('.unitsAvailable');
 const totalUnits = document.querySelector('.totalUnits');
 const totalAmount = document.querySelector('.totalAmount');
-const advanceTaken = document.querySelector('.advanceTaken');
+const advanceCheck = document.querySelector('.advanceTakenCheck');
+const advanceUncheck = document.querySelector('.advanceTakenUncheck');
 const advanceBalance = document.querySelector('.advanceBalance');
 
 // Factory Function instance 
 const electricity = Electricity();
 if (localStorage.getItem('electricityValues')) {
 	electricity.setValues(JSON.parse(localStorage.getItem('electricityValues')));
-	updateDisplay();
 } else {
 	updateLocalStorage();
 }
+updateDisplay();
 
 function buyButtonClicked() {
 	let topupAmount = document.querySelector('input[name="buyElectricity"]:checked');
@@ -63,9 +64,11 @@ function updateDisplay() {
 	totalAmount.innerHTML = electricity.totalAmountSpent().toFixed(2);
 
 	if (electricity.advanceTaken()) {
-		advanceTaken.classList.remove('hidden');
+		advanceCheck.classList.remove('hidden');
+		advanceUncheck.classList.add('hidden');
 	} else {
-		advanceTaken.classList.add('hidden');
+		advanceCheck.classList.add('hidden');
+		advanceUncheck.classList.remove('hidden');
 	}
 
 	if (electricity.advanceTaken()) {
