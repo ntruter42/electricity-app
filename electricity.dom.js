@@ -110,7 +110,7 @@ function displayMessage() {
 
 				setTimeout(function () {
 					box.classList.add('hidden');
-				}, 1500);
+				}, 3000);
 			}
 		}
 
