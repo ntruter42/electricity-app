@@ -1,6 +1,8 @@
 function Electricity() {
 	let unitsAvailable = 0;
 	let advanceBalance = 0;
+	let amountSpent = 0;
+	let unitsBought = 0;
 	let appliances = {
 		'Stove': 10,
 		'Kettle': 5,
@@ -13,10 +15,12 @@ function Electricity() {
 			unitsAvailable += 21;
 			advanceBalance = 30;
 		} else if (typeof amount === 'number') {
+			amountSpent += amount;
 			if (amount > advanceBalance) {
 				amount -= advanceBalance;
 				advanceBalance = 0;
 				unitsAvailable += (amount / 10) * 7;
+				unitsBought += (amount / 10) * 7;
 			} else {
 				advanceBalance -= amount;
 			}
@@ -44,9 +48,11 @@ function Electricity() {
 	}
 
 	function totalAmountSpent() {
+		return amountSpent;
 	}
 
 	function totalUnitsBought() {
+		return unitsBought;
 	}
 
 	return {
