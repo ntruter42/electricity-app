@@ -5,7 +5,8 @@ function Electricity() {
 	let unitsBought = 0;
 	let messageObject = {
 		'message': '',
-		'color': ''
+		'color': '',
+		'section': ''
 	};
 	let appliances = {
 		'Stove': 10,
@@ -19,6 +20,9 @@ function Electricity() {
 			unitsAvailable += 21;
 			unitsBought += 21;
 			advanceBalance = 30;
+			setMessage('Advance granted', 'green', 'topup-section');
+		} else if (amount === 'advance' && advanceTaken()) {
+			setMessage('Advance already used', 'red', 'topup-section');
 		} else if (typeof Number(amount) === 'number' && Number(amount) > 0) {
 			let amountValue = Number(amount);
 
@@ -28,8 +32,13 @@ function Electricity() {
 				advanceBalance = 0;
 				unitsAvailable += (amountValue / 10) * 7;
 				unitsBought += (amountValue / 10) * 7;
+				setMessage('Units topped up', 'green', 'topup-section');
 			} else {
 				advanceBalance -= amountValue;
+				setMessage('Advance partially paid', 'green', 'topup-section');
+				if (!advanceTaken()) {
+					setMessage('Advance fully paid', 'green', 'topup-section');
+				}
 			}
 		}
 	}
@@ -45,9 +54,12 @@ function Electricity() {
 	function useAppliance(appliance) {
 		if (unitsAvailable >= appliances[appliance]) {
 			unitsAvailable -= appliances[appliance];
+			setMessage(appliance + ' used ' + appliances[appliance] + ' units', 'green', 'use-section');
 			return true;
+		} else {
+			setMessage('Not enough units', 'red', 'use-section');
+			return false;
 		}
-		return false;
 	}
 
 	function advanceTaken() {
@@ -82,18 +94,20 @@ function Electricity() {
 		}
 	}
 
-	function setMessage(message, color) {
-		messageObject[message] = message;
-		messageObject[color] = color;
+	function setMessage(message, color, section) {
+		messageObject.message = message;
+		messageObject.color = color;
+		messageObject.section = section;
 	}
 
 	function getMessage() {
-		let displayMessage = messageObject;
+		let retrievedMessage = messageObject;
 		messageObject = {
 			'message': '',
-			'color': ''
+			'color': '',
+			'section': ''
 		};
-		return displayMessage;
+		return retrievedMessage;
 	}
 
 	return {

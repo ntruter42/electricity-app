@@ -29,8 +29,9 @@ function buyButtonClicked() {
 		updateLocalStorage();
 		updateDisplay();
 	} else {
-		console.log('no amount selected');
+		electricity.setMessage('Select an amount', 'red', 'topup-section');
 	}
+	displayMessage();
 }
 
 function useButtonClicked() {
@@ -41,8 +42,9 @@ function useButtonClicked() {
 		updateLocalStorage();
 		updateDisplay();
 	} else {
-		console.log('no appliance selected');
+		electricity.setMessage('Select an appliance', 'red', 'use-section');
 	}
+	displayMessage();
 }
 
 function resetButtonClicked() {
@@ -53,9 +55,15 @@ function resetButtonClicked() {
 		'unitsBought': 0
 	}
 
-	electricity.setValues(zeroedValues);
-	updateLocalStorage();
-	updateDisplay();
+	if (JSON.stringify(electricity.getValues()) === JSON.stringify(zeroedValues)) {
+		electricity.setMessage('Values already reset', 'red', 'display-section');
+	} else {
+		electricity.setValues(zeroedValues);
+		updateLocalStorage();
+		updateDisplay();
+		electricity.setMessage('Values reset', 'green', 'display-section');
+	}
+	displayMessage();
 }
 
 function updateDisplay() {
@@ -84,6 +92,25 @@ function updateLocalStorage() {
 }
 
 function displayMessage() {
+	let messageTimeout;
+	let message = electricity.getMessage();
+
+	if (message) {
+		clearTimeout(messageTimeout);
+
+		const section = '.' + message.section;
+		const sectionElement = document.querySelector(section);
+		const messageContent = sectionElement.querySelector('.message');
+		const messageBox = sectionElement.querySelector('.message-box');
+
+		messageContent.innerHTML = message.message;
+		messageBox.classList.remove('hidden', 'green', 'red', 'white');
+		messageBox.classList.add(message.color);
+
+		messageTimeout = setTimeout(function () {
+			messageBox.classList.add('hidden');
+		}, 3000);
+	}
 }
 
 // DOM events here

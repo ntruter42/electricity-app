@@ -3,6 +3,16 @@ body {
 	background-color: white
 }
 
+header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+header h1 {
+	margin-inline: 20px;
+}
+
 .count {
 	font-size: 4em;
 	padding: 0.1em;
@@ -79,7 +89,7 @@ button img {
 }
 
 .hidden {
-	display: none;
+	display: none !important;
 }
 
 @media (min-width: 768px) {
