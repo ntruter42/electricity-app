@@ -32,7 +32,7 @@ function Electricity() {
 				advanceBalance = 0;
 				unitsAvailable += (amountValue / 10) * 7;
 				unitsBought += (amountValue / 10) * 7;
-				setMessage('Units topped up', 'green', 'topup-section');
+				setMessage(((amountValue / 10) * 7) +' units topped up', 'green', 'topup-section');
 			} else {
 				advanceBalance -= amountValue;
 				setMessage('Advance partially paid', 'green', 'topup-section');
@@ -57,7 +57,7 @@ function Electricity() {
 			setMessage(appliance + ' used ' + appliances[appliance] + ' units', 'green', 'use-section');
 			return true;
 		} else {
-			setMessage('Not enough units', 'red', 'use-section');
+			setMessage('Not enough electricity - buy ' + (appliances[appliance] - unitsAvailable) + ' more unit(s)', 'red', 'use-section');
 			return false;
 		}
 	}

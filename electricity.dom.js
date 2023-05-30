@@ -12,7 +12,7 @@ const advanceCheck = document.querySelector('.advanceTakenCheck');
 const advanceUncheck = document.querySelector('.advanceTakenUncheck');
 const advanceBalance = document.querySelector('.advanceBalance');
 
-// Factory Function instance 
+// FUNCTIONALITY
 const electricity = Electricity();
 if (localStorage.getItem('electricityValues')) {
 	electricity.setValues(JSON.parse(localStorage.getItem('electricityValues')));
@@ -20,6 +20,7 @@ if (localStorage.getItem('electricityValues')) {
 	updateLocalStorage();
 }
 updateDisplay();
+let messageTimeout;
 
 function buyButtonClicked() {
 	let topupAmount = document.querySelector('input[name="buyElectricity"]:checked');
@@ -92,8 +93,9 @@ function updateLocalStorage() {
 }
 
 function displayMessage() {
-	let messageTimeout;
 	let message = electricity.getMessage();
+
+	const hiddenBoxes = document.querySelectorAll('.message-box');
 
 	if (message) {
 		clearTimeout(messageTimeout);
@@ -102,6 +104,15 @@ function displayMessage() {
 		const sectionElement = document.querySelector(section);
 		const messageContent = sectionElement.querySelector('.message');
 		const messageBox = sectionElement.querySelector('.message-box');
+
+		for (let box of hiddenBoxes) {
+			if (box != messageBox) {
+
+				setTimeout(function () {
+					box.classList.add('hidden');
+				}, 1500);
+			}
+		}
 
 		messageContent.innerHTML = message.message;
 		messageBox.classList.remove('hidden', 'green', 'red', 'white');
