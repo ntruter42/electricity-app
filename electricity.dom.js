@@ -94,25 +94,21 @@ function updateLocalStorage() {
 
 function displayMessage() {
 	let message = electricity.getMessage();
-
+	
 	const hiddenBoxes = document.querySelectorAll('.message-box');
-
+	for (let box of hiddenBoxes) {
+		setTimeout(function () {
+			box.classList.add('hidden');
+		}, 3000);
+	}
+	
 	if (message) {
 		clearTimeout(messageTimeout);
-
 		const section = '.' + message.section;
 		const sectionElement = document.querySelector(section);
 		const messageContent = sectionElement.querySelector('.message');
 		const messageBox = sectionElement.querySelector('.message-box');
 
-		for (let box of hiddenBoxes) {
-			if (box != messageBox) {
-
-				setTimeout(function () {
-					box.classList.add('hidden');
-				}, 3000);
-			}
-		}
 
 		messageContent.innerHTML = message.message;
 		messageBox.classList.remove('hidden', 'green', 'red', 'white');

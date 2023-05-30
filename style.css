@@ -62,10 +62,16 @@ header h1 {
 button {
 	display: flex;
 	align-items: center;
+	border: 2px solid black;
+	box-shadow: 1px 1px black, 2px 2px black;
 
 	padding: 1em;
 	border-radius: 0.5em;
 	font-weight: bold;
+}
+
+button:active {
+	box-shadow: none;
 }
 
 button img {
