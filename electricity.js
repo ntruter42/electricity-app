@@ -3,6 +3,10 @@ function Electricity() {
 	let advanceBalance = 0;
 	let amountSpent = 0;
 	let unitsBought = 0;
+	let messageObject = {
+		'message': '',
+		'color': ''
+	};
 	let appliances = {
 		'Stove': 10,
 		'Kettle': 5,
@@ -74,6 +78,20 @@ function Electricity() {
 		}
 	}
 
+	function setMessage(message, color) {
+		messageObject[message] = message;
+		messageObject[color] = color;
+	}
+
+	function getMessage() {
+		let displayMessage = messageObject;
+		messageObject = {
+			'message': '',
+			'color': ''
+		};
+		return displayMessage;
+	}
+
 	return {
 		advanceTaken,
 		topUpElectricity,
@@ -82,6 +100,8 @@ function Electricity() {
 		totalAmountSpent,
 		totalUnitsBought,
 		setValues,
-		getValues
+		getValues,
+		setMessage,
+		getMessage
 	}
 }

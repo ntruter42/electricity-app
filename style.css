@@ -3,7 +3,6 @@ body {
 	background-color: white
 }
 
-
 .count {
 	font-size: 4em;
 	padding: 0.1em;
@@ -27,6 +26,24 @@ body {
 	border: 2px solid black;
 }
 
+.message-box {
+	display: flex;
+	justify-content: center;
+	border-radius: 5px;
+	margin-top: 20px;
+	padding: 5px;
+}
+
+.green {
+	background-color: #0804;
+	border: 2px solid #080;
+}
+
+.red {
+	background-color: #f004;
+	border: 2px solid #f00;
+}
+
 button {
 
 	padding: 1em;
@@ -35,7 +52,7 @@ button {
 }
 
 .total {
-    font-weight: bold   ;
+	font-weight: bold;
 }
 
 .mt1 {
@@ -59,4 +76,3 @@ button {
 		display: flex;
 	}
 }
-
