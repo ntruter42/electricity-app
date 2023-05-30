@@ -1,6 +1,6 @@
 function Electricity() {
 	let unitsAvailable = 0;
-	let advanceOwing = 0;
+	let advanceBalance = 0;
 	let appliances = {
 		'Stove': 10,
 		'Kettle': 5,
@@ -11,19 +11,21 @@ function Electricity() {
 	function topUpElectricity(amount) {
 		if (amount === 'advance' && !advanceTaken()) {
 			unitsAvailable += 21;
-		} else if (amount > 0) {
-			unitsAvailable += (amount / 10) * 7;
+			advanceBalance = 30;
+		} else if (typeof amount === 'number') {
+			if (amount > advanceBalance) {
+				amount -= advanceBalance;
+				advanceBalance = 0;
+				unitsAvailable += (amount / 10) * 7;
+			} else {
+				advanceBalance -= amount;
+			}
 		}
 	}
 
 	function getUnitsAvailable() {
 		return unitsAvailable;
 	}
-
-	/*
-	* return true and subtract from units available if there is enough units to use the appliance
-	* other wise return false and do nothing.
-	*/
 
 	function useAppliance(appliance) {
 		if (unitsAvailable >= appliances[appliance]) {
@@ -34,10 +36,9 @@ function Electricity() {
 	}
 
 	function advanceTaken() {
-		if (advanceOwing > 0) {
+		if (advanceBalance > 0) {
 			return true;
 		} else {
-			advanceOwing = 30;
 			return false;
 		}
 	}
