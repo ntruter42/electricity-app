@@ -1,6 +1,7 @@
 // INPUT ELEMENTS
 const buy = document.querySelector('.topupNow');
 const use = document.querySelector('.useNow');
+const reset = document.querySelector('.resetNow');
 // get radio elements after event listeners
 
 // OUTPUT ELEMENTS
@@ -23,8 +24,8 @@ function buyButtonClicked() {
 
 	if (topupAmount) {
 		electricity.topUpElectricity(topupAmount.value);
-		updateDisplay();
 		updateLocalStorage();
+		updateDisplay();
 	} else {
 		console.log('no amount selected');
 	}
@@ -35,11 +36,24 @@ function useButtonClicked() {
 
 	if (applianceUsed) {
 		electricity.useAppliance(applianceUsed.value);
-		updateDisplay();
 		updateLocalStorage();
+		updateDisplay();
 	} else {
 		console.log('no appliance selected');
 	}
+}
+
+function resetButtonClicked() {
+	const zeroedValues = {
+		'unitsAvailable': 0,
+		'advanceBalance': 0,
+		'amountSpent': 0,
+		'unitsBought': 0
+	}
+
+	electricity.setValues(zeroedValues);
+	updateLocalStorage();
+	updateDisplay();
 }
 
 function updateDisplay() {
@@ -58,7 +72,12 @@ function updateLocalStorage() {
 	localStorage.setItem('electricityValues', JSON.stringify(electricity.getValues()));
 }
 
+function displayMessage() {
+}
+
 // DOM events here
 buy.addEventListener('click', buyButtonClicked);
 
 use.addEventListener('click', useButtonClicked);
+
+reset.addEventListener('click', resetButtonClicked);

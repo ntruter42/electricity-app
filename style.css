@@ -40,15 +40,26 @@ body {
 }
 
 .red {
-	background-color: #f004;
+	background-color: #f006;
 	border: 2px solid #f00;
 }
 
+.white {
+	background-color: #fff8;
+	border: 2px solid #fff;
+}
+
 button {
+	display: flex;
+	align-items: center;
 
 	padding: 1em;
 	border-radius: 0.5em;
 	font-weight: bold;
+}
+
+button img {
+	margin-left: 5px;
 }
 
 .total {
